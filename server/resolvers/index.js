@@ -1,5 +1,7 @@
 import fakeData from "../fakeData/index.js";
 import FolderModel from "../models/FolderModel.js";
+import NoteModel from "../models/NoteModel.js";
+import AuthorModel from "../models/AuthorModel.js";
 
 export const resolvers = {
   Query: {
@@ -15,9 +17,10 @@ export const resolvers = {
       const foundFolder = await FolderModel.findOne({ _id: folderId });
       return foundFolder;
     },
-    note: (parent, args) => {
+    note: async (parent, args) => {
       const noteId = args.noteId;
-      return fakeData.notes.find((note) => note.id === noteId);
+      const note = await NoteModel.findById(noteId);
+      return note;
     },
   },
   Folder: {
