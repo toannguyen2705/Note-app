@@ -46,7 +46,8 @@ const authorizationJWT = async (req, res, next) => {
         return res.status(403).json({ message: "Forbiden", error: error });
       });
   } else {
-    return res.status(401).json({ message: "Unauthorized" });
+    next();
+    // return res.status(401).json({ message: "Unauthorized" });
   }
 };
 

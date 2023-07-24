@@ -9,7 +9,6 @@ export const resolvers = {
       const folders = await FolderModel.find({
         authorId: context.uid,
       });
-      console.log({ folders, context });
       return folders;
     },
     folder: async (parent, args) => {
@@ -24,12 +23,18 @@ export const resolvers = {
     },
   },
   Folder: {
-    author: (parent, args) => {
-      const authoreId = parent.authorId;
-      return fakeData.authors.find((author) => author.id === authoreId);
+    author: async (parent, args) => {
+      const authorId = parent.authorId;
+      const author = await AuthorModel.findOne({
+        uid: authorId,
+      });
+      return author;
     },
-    notes: (parent, args) => {
-      return fakeData.notes.filter((note) => note.folderId === parent.id);
+    notes: async (parent, args) => {
+      const notes = await NoteModel.find({
+        folderId: parent.id,
+      });
+      return notes;
     },
   },
   Mutation: {

@@ -13,8 +13,8 @@ export const typeDefs = `#graphql
   }
 
   type Author{
-    uid: String,
-    name: String,
+    uid: String!,
+    name: String!,
 
   }
 
