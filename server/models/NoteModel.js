@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const NoteSchema = new mongoose.Schema(
+const noteSchema = new mongoose.Schema(
   {
     content: {
       type: String,
@@ -13,5 +13,5 @@ const NoteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const NoteModel = mongoose.model("Note", NoteSchema);
+const NoteModel = mongoose.model("Note", noteSchema);
 export default NoteModel;

@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 import mongoose from "mongoose";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import "dotenv/config.js";
 import "./firebaseConfig.js";
 
@@ -18,12 +19,13 @@ const app = express();
 const httpServer = http.createServer(app);
 
 // Connect to DB
-const URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.ovltixo.mongodb.net/?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://toannguyen27052001:${process.env.DB_PASSWORD}@cluster0.zfmv4q8.mongodb.net/?retryWrites=true&w=majority`;
 const PORT = process.env.PORT || 4000;
 
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 

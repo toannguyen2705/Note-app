@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const FolderSchema = new mongoose.Schema(
+const folderSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -14,5 +14,5 @@ const FolderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const FolderModel = mongoose.model("Folder", FolderSchema);
+const FolderModel = mongoose.model("Folder", folderSchema);
 export default FolderModel;
