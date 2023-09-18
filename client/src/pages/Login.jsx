@@ -14,9 +14,10 @@ export default function Login() {
     const {
       user: { uid, displayName },
     } = await signInWithPopup(auth, provider);
+
     const { data } = await graphQLRequest({
       query: `mutation register($uid: String!, $name: String!) {
-      registrer(uid: $uid, name: $name) {
+      register(uid: $uid, name: $name) {
         uid
         name
       }
@@ -24,7 +25,7 @@ export default function Login() {
     variables:{
       uid,
       name: displayName,
-    }
+    },
     });
     console.log('register',{data});
   };

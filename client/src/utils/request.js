@@ -1,6 +1,6 @@
 import { GRAPHQL_SERVER } from "./constants";
 
-export const graphQLRequest = async (payLoad, options = {}) => {
+export const graphQLRequest = async (payload, options = {}) => {
   if (localStorage.getItem("accessToken")) {
     const res = await fetch(`${GRAPHQL_SERVER}/graphql`, {
       method: "POST",
@@ -10,11 +10,11 @@ export const graphQLRequest = async (payLoad, options = {}) => {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         ...options,
       },
-      body: JSON.stringify(payLoad),
+      body: JSON.stringify(payload),
     });
 
     if(!res.ok){
-      if(res.stuts === 403){
+      if(res.status === 403){
         return null;
       }
     }

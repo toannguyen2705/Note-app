@@ -36,7 +36,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {isLoading? <CircularProgress /> : children}
+      {isLoading ? <CircularProgress /> : children}
     </AuthContext.Provider>
   );
 }

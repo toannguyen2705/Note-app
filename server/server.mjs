@@ -19,7 +19,7 @@ const app = express();
 const httpServer = http.createServer(app);
 
 // Connect to DB
-const URI = `mongodb+srv://toannguyen27052001:${process.env.DB_PASSWORD}@cluster0.zfmv4q8.mongodb.net/?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://toannguyen27052001:${process.env.DB_PASSWORD}@cluster0.fw42dm9.mongodb.net/?retryWrites=true&w=majority`;
 const PORT = process.env.PORT || 4000;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });

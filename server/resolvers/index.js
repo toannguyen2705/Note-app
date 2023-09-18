@@ -7,6 +7,8 @@ export const resolvers = {
     folders: async (parent, args, context) => {
       const folders = await FolderModel.find({
         authorId: context.uid,
+      }).sort({
+        updateAt: "desc"
       });
       return folders;
     },
@@ -38,7 +40,7 @@ export const resolvers = {
   },
   Mutation: {
     addFolder: async (parent, args, context) => {
-      const newFolder = new FolderModel({ ...args, authorId: constext.uid });
+      const newFolder = new FolderModel({ ...args, authorId: context.uid });
       await newFolder.save();
       return newFolder;
     },
