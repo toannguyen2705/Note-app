@@ -1,18 +1,13 @@
-import { Outlet, createBrowserRouter } from "react-router-dom";
-
-import AuthProvider from "../context/AuthProvider";
-
-import ErrorPage from "../pages/ErrorPage";
-import Login from "../pages/Login";
-import Home from "../pages/Home";
-
-import ProtectedRoute from "./ProtectedRoute";
-
-import NoteList from "../components/NoteList";
-import Note from "../components/Note";
-
-import { foldersLoader } from "../utils/folderUtils";
-import { notesLoader, noteLoader } from "../utils/noteUtils";
+import { createBrowserRouter, Outlet } from 'react-router-dom';
+import Note from '../components/Note';
+import NoteList from '../components/NoteList';
+import AuthProvider from '../context/AuthProvider';
+import ErrorPage from '../pages/ErrorPage';
+import Home from '../pages/Home';
+import Login from '../pages/Login';
+import { foldersLoader } from '../utils/folderUtils';
+import { addNewNote, noteLoader, notesLoader, updateNote } from '../utils/noteUtils';
+import ProtectedRoute from './ProtectedRoute';
 
 const AuthLayout = () => {
   return (
@@ -29,29 +24,31 @@ export default createBrowserRouter([
     children: [
       {
         element: <Login />,
-        path: "/login",
+        path: '/login',
       },
       {
         element: <ProtectedRoute />,
         children: [
           {
             element: <Home />,
-            path: "/",
+            path: '/',
             loader: foldersLoader,
             children: [
               {
                 element: <NoteList />,
                 path: `folders/:folderId`,
+                action: addNewNote,
                 loader: notesLoader,
                 children: [
                   {
                     element: <Note />,
-                    path: `notes/:noteId`,
+                    path: `note/:noteId`,
+                    action: updateNote,
                     loader: noteLoader,
-                  },
-                ],
-              },
-            ],
+                  }
+                ]
+              }
+            ]
           },
         ],
       },
